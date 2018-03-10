@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="seckiller:war">
-    <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="seckiller.war">
-      <element id="artifact" artifact-name="seckiller:war exploded" />
-    </root>
-  </artifact>
-</component>
