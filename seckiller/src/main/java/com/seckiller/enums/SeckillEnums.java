@@ -2,10 +2,11 @@ package com.seckiller.enums;
 
 public enum  SeckillEnums {
     SUCCESS(0,"秒杀成功"),
-    REPEAT(1,"重复秒杀"),
-    CLOSE(2,"秒杀结束"),
+    REPEAT_KILL(1,"重复秒杀"),
+    END(2,"秒杀结束"),
     DATA_REWRITE(3,"数据被篡改"),
-    INNER_ERROR(4,"系统错误");
+    INNER_ERROR(4,"系统错误")
+    ;
     private int state;
 
     private String stateInfo;
@@ -29,5 +30,14 @@ public enum  SeckillEnums {
 
     public void setStateInfo(String stateInfo) {
         this.stateInfo = stateInfo;
+    }
+
+    public static SeckillEnums stateOf(int index) {
+        for(SeckillEnums seckillEnums : values()) {
+            if(seckillEnums.getState() == index) {
+                return seckillEnums;
+            }
+        }
+        return null;
     }
 }

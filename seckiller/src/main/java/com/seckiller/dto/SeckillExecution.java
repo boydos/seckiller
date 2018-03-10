@@ -6,7 +6,7 @@ import com.seckiller.enums.SeckillEnums;
 /**
  * 返回秒杀执行结果
  */
-public class Execution {
+public class SeckillExecution {
 
     private long seckillerId;
 
@@ -14,19 +14,16 @@ public class Execution {
 
     private String stateInfo;
 
-    private long now;
-
     private SuccessKilled successKilled;
 
-    public Execution(long seckillerId,SeckillEnums seckillEnums, long now, SuccessKilled successKilled) {
+    public SeckillExecution(long seckillerId, SeckillEnums seckillEnums,SuccessKilled successKilled) {
         this.seckillerId = seckillerId;
         this.state = seckillEnums.getState();
         this.stateInfo = seckillEnums.getStateInfo();
-        this.now = now;
         this.successKilled = successKilled;
     }
 
-    public Execution(long seckillerId, SeckillEnums seckillEnums) {
+    public SeckillExecution(long seckillerId, SeckillEnums seckillEnums) {
         this.seckillerId = seckillerId;
         this.state = seckillEnums.getState();
         this.stateInfo = seckillEnums.getStateInfo();
@@ -34,12 +31,11 @@ public class Execution {
 
     @Override
     public String toString() {
-        return "{" +
-                "seckillerId:" + seckillerId +
-                ", state:" + state +
-                ", stateInfo:'" + stateInfo + '\'' +
-                ", now:" + now +
-                ", successKilled:" + successKilled +
+        return "SeckillExecution{" +
+                "seckillerId=" + seckillerId +
+                ", state=" + state +
+                ", stateInfo='" + stateInfo + '\'' +
+                ", successKilled=" + successKilled +
                 '}';
     }
 }

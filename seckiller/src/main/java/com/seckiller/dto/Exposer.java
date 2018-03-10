@@ -5,9 +5,9 @@ package com.seckiller.dto;
  */
 public class Exposer {
 
-    private long seckillerId;
+    private boolean expose;
 
-    private boolean enable;
+    private long seckillerId;
 
     private String md5;
 
@@ -15,25 +15,26 @@ public class Exposer {
 
     private long start;
 
+
     private long end;
 
-    public Exposer(long seckillerId, boolean enable) {
+    public Exposer(boolean expose, long seckillerId, String md5) {
+        this.expose = expose;
         this.seckillerId = seckillerId;
-        this.enable = enable;
+        this.md5 = md5;
     }
 
-    public Exposer(long seckillerId,boolean enable, long now, long start, long end) {
+    public Exposer(boolean expose, long seckillerId, long now, long start, long end) {
+        this.expose = expose;
         this.seckillerId = seckillerId;
-        this.enable = enable;
         this.now = now;
         this.start = start;
         this.end = end;
     }
 
-    public Exposer(long seckillerId, boolean enable, String md5) {
+    public Exposer(boolean expose, long seckillerId) {
+        this.expose = expose;
         this.seckillerId = seckillerId;
-        this.enable = enable;
-        this.md5 = md5;
     }
 
     public long getSeckillerId() {
@@ -44,12 +45,13 @@ public class Exposer {
         this.seckillerId = seckillerId;
     }
 
-    public boolean isEnable() {
-        return enable;
+
+    public boolean isExpose() {
+        return expose;
     }
 
-    public void setEnable(boolean enable) {
-        this.enable = enable;
+    public void setExpose(boolean expose) {
+        this.expose = expose;
     }
 
     public String getMd5() {
@@ -86,13 +88,13 @@ public class Exposer {
 
     @Override
     public String toString() {
-        return "{" +
-                "seckillerId:" + seckillerId +
-                ", enable:" + enable +
-                ", md5:'" + md5 + '\'' +
-                ", now:" + now +
-                ", start:" + start +
-                ", end:" + end +
+        return "Exposer{" +
+                "expose=" + expose +
+                ", seckillerId=" + seckillerId +
+                ", md5='" + md5 + '\'' +
+                ", now=" + now +
+                ", start=" + start +
+                ", end=" + end +
                 '}';
     }
 }

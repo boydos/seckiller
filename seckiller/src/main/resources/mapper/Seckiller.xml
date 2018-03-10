@@ -11,8 +11,8 @@
         number = number - 1
         where
         seckiller_id = #{seckillerId}
-        and start_time >= #{killTime}
-        and end_time <![CDATA[<=]]> #{killTime}
+        and start_time <![CDATA[<=]]> #{killTime}
+        and end_time >= #{killTime}
         and number > 0
     </update>
 

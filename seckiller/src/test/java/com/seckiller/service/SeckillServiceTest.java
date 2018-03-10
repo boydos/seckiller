@@ -1,15 +1,18 @@
 package com.seckiller.service;
 
-import com.seckiller.dto.Execution;
 import com.seckiller.dto.Exposer;
+import com.seckiller.dto.SeckillExecution;
 import com.seckiller.entity.Seckiller;
+import com.seckiller.exception.SeckillCloseException;
+import com.seckiller.exception.SeckillRepeatException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.Date;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -18,43 +21,44 @@ import java.util.List;
         "classpath:spring/spring-service.xml"})
 public class SeckillServiceTest {
 
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
     @Autowired
     SeckillService seckillService;
 
+
     @Test
-    public void queryAll() {
-        List<Seckiller> seckillers = seckillService.queryAll();
-        for(Seckiller seckiller : seckillers) {
-            System.out.println(seckiller);
+    public void getSeckillerList() {
+        List<Seckiller> seckillers = seckillService.getSeckillerList();
+        logger.info("seckillers={}",seckillers);
+    }
+
+    @Test
+    public void getById() {
+        long id = 1000;
+        Seckiller seckiller = seckillService.getById(id);
+        logger.info("seckiller={}",seckiller);
+    }
+
+    @Test
+    public void exposeSeckill() {
+        long id = 1000;
+        Exposer exposer = seckillService.exportSeckillUrl(id);
+        logger.info("exposer={}",exposer);
+
+        if( exposer.isExpose() ) {
+            long userPhone = 15022559989L;
+            String md5 = exposer.getMd5();
+            try {
+                SeckillExecution execution = seckillService.executeSeckill(id,userPhone,md5);
+                logger.info("result={}",execution);
+            } catch (SeckillRepeatException e) {
+                logger.warn(e.getMessage());
+            } catch (SeckillCloseException e) {
+                logger.warn(e.getMessage());
+            }
         }
-    }
 
-    @Test
-    public void queryById() {
-        long id = 1000;
-        Seckiller seckiller = seckillService.queryById(id);
-        System.out.println(seckiller);
     }
-
-    @Test
-    public void exposerSeckillUrl() {
-        long id = 1000;
-        Date now = new Date(System.currentTimeMillis()+24*60*60*1000);
-        Exposer exposer = seckillService.exposerSeckillUrl(id,now);
-        System.out.println(exposer);
-    }
-
-    @Test
-    public void executeSeckill() {
-        long id = 1000;
-        long userPhone = 15011550099L;
-        Date now = new Date();
-        Exposer exposer = seckillService.exposerSeckillUrl(id,now);
-        if( exposer.isEnable() ) {
-           Execution execution = seckillService.executeSeckill(id,userPhone,exposer.getMd5());
-           System.out.println(execution);
-        }
-    }
-
 
 }
