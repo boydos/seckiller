@@ -29,6 +29,38 @@ public class SeckillExecution {
         this.stateInfo = seckillEnums.getStateInfo();
     }
 
+    public long getSeckillerId() {
+        return seckillerId;
+    }
+
+    public void setSeckillerId(long seckillerId) {
+        this.seckillerId = seckillerId;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
+
+    public String getStateInfo() {
+        return stateInfo;
+    }
+
+    public void setStateInfo(String stateInfo) {
+        this.stateInfo = stateInfo;
+    }
+
+    public SuccessKilled getSuccessKilled() {
+        return successKilled;
+    }
+
+    public void setSuccessKilled(SuccessKilled successKilled) {
+        this.successKilled = successKilled;
+    }
+
     @Override
     public String toString() {
         return "SeckillExecution{" +
